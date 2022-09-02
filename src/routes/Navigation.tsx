@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate} from "react-router-dom";
 import { Route, Routes, NavLink} from "react-router-dom";
+import { ShoppingPage } from "../02-component-patterns/pages/ShoppingPage";
 import logo from '../logo.svg';
 
 export const Navigation = () => {
@@ -30,9 +31,9 @@ export const Navigation = () => {
                 </nav>
 
                 <Routes>
-                    <Route path="lazy1" element={<h1>Componente About</h1>} />
-                    <Route path="lazy2" element={<h1>Componente Users</h1>} />
-                    <Route path="lazy3" element={<h1>Componente Home</h1>} />
+                    <Route path="lazy1" element={<ShoppingPage /> } />
+                    <Route path="lazy2" element={<h1>Componente About</h1>} />
+                    <Route path="lazy3" element={<h1>Componente Users</h1>} />
 
                     <Route path="/*" element={ <Navigate to={"/lazy1"} replace /> } />
                 </Routes>
