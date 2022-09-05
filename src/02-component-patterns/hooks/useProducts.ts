@@ -1,13 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { onChangeArgs, Product } from '../interfaces/interfaces';
 
 
-export const useProduct = () => {
+interface useProductArgs {
+    product: Product;
+    onChange?: (args: onChangeArgs) => void;
+    value?: number;
+}
 
-    const [counter , setCounter ] = useState(0)
+
+export const useProduct = ( { onChange, product, value = 0 }: useProductArgs ) => {
+
+    const [counter , setCounter ] = useState(value);
+
+    const isControlled = useRef( !!onChange );
 
     const increaseBy = ( value: number ) => {
-        setCounter( prev => Math.max(0, prev + value)) // para que no sea menor a 0
+
+        // si esta siendo controlado
+        if ( isControlled.current ) {
+            //para decir a typescript que onChange no es undefined
+            return onChange!({ quantity: value, product });
+        }
+
+
+        const newValue = Math.max(0, counter + value);
+
+        setCounter( newValue ); 
+
+        onChange && onChange( { quantity: newValue, product  } );
     }
+
+    useEffect(() => {
+
+        setCounter(value);
+
+
+    }, [value]) // cuando el value cambie, se ejecutará el useEffect
+    
+
+
 
     return {
         counter,
