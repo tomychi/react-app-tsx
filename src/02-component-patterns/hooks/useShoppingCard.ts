@@ -11,20 +11,16 @@ export const useShoppingCart = () => {
 
         setShoppingCart( (prevShoppingCart) => {
 
-            // si existe el producto en el carrito
-            const productInCart: ProductInCart = prevShoppingCart[product.id] || {...product, quantity: 0};
-
-            if ( Math.max( productInCart.quantity + quantity, 0 ) > 0) {
-                productInCart.quantity += quantity;
-                return {
-                    ...prevShoppingCart,
-                    [product.id]: productInCart,
-                };
+            if (quantity === 0) {
+                // borramos el elemento del carrito
+                const { [product.id]: _, ...rest } = prevShoppingCart;
+                return rest;
+            }
+            return {
+                ...prevShoppingCart,
+                [product.id]: {...product, quantity},
             }
 
-            // borrar el producto del carrito
-            const { [product.id]: _, ...rest } = prevShoppingCart;
-            return {...rest};
         });
     };
 
