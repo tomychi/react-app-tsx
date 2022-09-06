@@ -4,76 +4,52 @@ import {
     ProductTitle,
     ProductButtons,
 } from '../components';
-import { useShoppingCart } from '../hooks/useShoppingCard';
 import { products } from '../data/products';
 
 import '../styles/custom-styles.css';
 
+const product = products[0];
 
 
 export const ShoppingPage = () => {
 
-    const {shoppingCart, onProductCountChange } = useShoppingCart();
 
     return (
         <div>
             <h1>Shopping Store</h1>
             <hr />
-
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'wrap',
+            <ProductCard 
+                key={product.id}
+                product={product}
+                className="bg-dark text-white"
+                initialValues = {{
+                    quantity: 4,
+                    maxQuantity: 10,
                 }}
             >
-        
+                {/* Formik me devuelve una funcion y en base a eso trabajo */}
                 {
-                    products.map((product) => (
-                        <ProductCard 
-                            key={product.id}
-                            product={product}
-                            className="bg-dark text-white"
-                            onChange={ onProductCountChange } 
-                            value = { shoppingCart[product.id]?.quantity || 0 } // si existe el producto en el carrito, entonces le asigno la cantidad, sino 0
-                        >
+                    ( {reset, quantity, isMaxQuantityReached, increaseBy, maxQuantity} ) => (
+                        <>
                             <ProductImage className="custom-image" style={{boxShadow: '10px 10px 10px rba(0,0,0,0.2) '  }} />
                             <ProductTitle className="text-bold" />
                             <ProductButtons className="custom-buttons" />
-                        </ProductCard>
-                    ))
+
+                            <button onClick={reset} >Reset</button>
+
+                            <button onClick={()=> increaseBy(-2)} >-2</button>
+
+                            {/* si no se llega al isMaxQuantity, ocultar */}
+
+                            {
+                                (!isMaxQuantityReached && <button onClick={()=> increaseBy(+2)} >+2</button>)
+                            }   
+                            <span>{quantity} - {maxQuantity}</span>
+
+                        </>
+                    )
                 }
-
-
-
-
-        
-            </div>
-            <div className='shopping-cart'>
-
-                {
-                    Object.entries(shoppingCart).map( ([key, product]) => (
-                        <ProductCard 
-                            key={key}
-                            product={product}
-                            className="bg-dark text-white"
-                            style={{width: '100px'}}
-                            onChange={ onProductCountChange }
-                            value={product.quantity}
-                        >
-                            <ProductImage className="custom-image" style={{boxShadow: '10px 10px 10px rgba(0,0,0,0.2) '  }} />
-                            <ProductButtons 
-                                className="custom-buttons" 
-                                style={{ 
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                            }}
-                            />
-                    </ProductCard>
-                    ))
-                }
-
-            </div>
+            </ProductCard>
         </div>
     );
 };
