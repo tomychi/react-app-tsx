@@ -30,9 +30,9 @@ export const Navigation = () => {
                 </nav>
 
                 <Routes>
-                    <Route path="lazy1" element={<h1>Componente About</h1>} />
-                    <Route path="lazy2" element={<h1>Componente Users</h1>} />
-                    <Route path="lazy3" element={<h1>Componente Home</h1>} />
+                    <Route path="lazy1" element={<h1>Componente Home</h1>} />
+                    <Route path="lazy2" element={<h1>Componente About</h1>} />
+                    <Route path="lazy3" element={<h1>Componente Users</h1>} />
 
                     <Route path="/*" element={ <Navigate to={"/lazy1"} replace /> } />
                 </Routes>
