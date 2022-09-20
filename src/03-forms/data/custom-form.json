@@ -1,0 +1,81 @@
+[
+    {
+        "type": "input",
+        "name": "firstName",
+        "placeholder": "Tomas",
+        "label": "First Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "message": "First Name is required"
+            },
+            {
+                "type": "minLength",
+                "message": "Debe tener al menos 3 caracteres",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "type": "input",
+        "name": "lastName",
+        "placeholder": "Lopez",
+        "label": "Last Name",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "message": "Last Name is required"
+            },
+            {
+                "type": "minLength",
+                "message": "Debe tener al menos 5 caracteres",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "type": "email",
+        "name": "email",
+        "placeholder": "ejemplo@gmail.com",
+        "label": "Email",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "message": "Email is required"
+            },
+            {
+                "type": "email",
+                "message": "Email is not valid"
+            }
+        ]
+    },
+    {
+        "type": "select",
+        "name": "favoriteGame",
+        "label": "Favorite Game",
+        "value": "",
+        "validations": [
+            {
+                "type": "required",
+                "message": "Favorite Game is required"
+            }
+        ],
+        "options": [
+            {
+                "label": "Counter Strike",
+                "id": "1"
+            },
+            {
+                "label": "The Forest",
+                "id": "2"
+            },
+            {
+                "label": "Resident Evil",
+                "id": "3"
+            }
+        ]
+    }
+]
